@@ -4,6 +4,7 @@ import { FEATURES } from "../logic/FeatureConfig";
 import FeatureSlider from "../components/FeatureSlider";
 import { encodeInput } from "../logic/EncodeInput";
 import { getMockCluster } from "../logic/MockCluster";
+import Navbar from "../components/Navbar";
 
 const MAX_INTERNSHIPS = 4;
 
@@ -81,6 +82,7 @@ function InputForm() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <Navbar />
       <div className="max-w-3xl mx-auto px-6 py-10">
   
       <h2 className="text-2xl font-semibold mb-2">Internship Expectations</h2>

@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import InputForm from "./InputForm";
+import Navbar from "../components/Navbar";
 
 function Insights() {
     const location = useLocation();
@@ -19,6 +20,7 @@ function Insights() {
 
     return (
         <div className="min-h-screen bg-gray-50">
+            <Navbar />
             <div className="max-w-3xl mx-auto px-6 py-10 space-y-8">
                 <h1 className="text-2xl font-semibold">Internship Insights</h1>
 
