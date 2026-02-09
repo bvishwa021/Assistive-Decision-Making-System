@@ -42,7 +42,7 @@ function Home() {
               highlighting trade-offs and experience patterns.
             </p>
             <button 
-            className="mt-8 px-6 py-3 justify-items-center bg-[#FF9644] text-[#562F00] text-lg rounded-lg font-semibold hover:bg-[#FFCE99] hover:underline transition-colors"
+            className="mt-8 px-6 py-3 justify-items-center bg-[#FF9644] text-[#562F00] text-lg rounded-lg font-semibold hover:bg-[#fc9f58] hover:border-amber-900 transition-colors"
             onClick={() => navigate('/input')}
             >
               Start Analysing Now

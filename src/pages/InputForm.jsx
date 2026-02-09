@@ -189,7 +189,7 @@ function InputForm() {
         <div className="mt-4 flex justify-end">
           <button
             onClick={handleSubmit}
-            className="px-6 py-2 rounded-lg bg-[#FF9644] text-[#562F00] hover:opacity-90 transition"
+            className="px-6 py-2 rounded-lg bg-[#FF9644] text-[#562F00] hover:bg-[#fc9f58] hover:border-amber-900 transition font-semibold"
           >
             See Insights
           </button>
