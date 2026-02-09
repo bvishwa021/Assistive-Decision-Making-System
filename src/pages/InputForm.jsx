@@ -5,6 +5,7 @@ import FeatureSlider from "../components/FeatureSlider";
 import { encodeInput } from "../logic/EncodeInput";
 import { getMockCluster } from "../logic/MockCluster";
 import Navbar from "../components/Navbar";
+import '../index.css';
 
 const MAX_INTERNSHIPS = 4;
 
@@ -16,6 +17,7 @@ const createEmptyInputs = (id) => {
 
   return {
     id,
+    name: "",
     inputs: base,
   };
 };
@@ -31,13 +33,21 @@ function InputForm() {
       prev.map((item) =>
         item.id === internshipId
           ? {
-              ...item,
-              inputs: {
-                ...item.inputs,
-                [key]: value,
-              },
-            }
+            ...item,
+            inputs: {
+              ...item.inputs,
+              [key]: value,
+            },
+          }
           : item
+      )
+    );
+  };
+
+  const handleNameChange = (internshipId, value) => {
+    setInternships((prev) =>
+      prev.map((item) =>
+        item.id === internshipId ? { ...item, name: value } : item
       )
     );
   };
@@ -58,21 +68,23 @@ function InputForm() {
 
       return {
         id: internship.id,
+        name: internship.name || `Internship ${internship.id}`,
         inputs: internship.inputs,
         encodedVector,
         clusterId,
       };
     });
 
+    // might remove
     const comparative =
       internships.length > 1
         ? {
-            type: "comparative",
-            internshipIds: internships.map((i) => i.id),
-          }
+          type: "comparative",
+          internshipIds: internships.map((i) => i.id),
+        }
         : null;
 
-        navigate("/insight", {
+    navigate("/insight", {
       state: {
         individualResults,
         comparative,
@@ -80,66 +92,107 @@ function InputForm() {
     });
   };
 
+  const count = internships.length;
+  const gridCols =
+    count === 1 ? "flex justify-center" :
+      count === 2 ? "grid grid-cols-2 gap-6" :
+        count === 3 ? "grid grid-cols-3 gap-6" :
+          "grid grid-cols-4 gap-6";
+
+  const cardWidth =
+    count === 1 ? "max-w-md w-full" : "w-full";
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#FFFDF1]">
       <Navbar />
-      <div className="max-w-3xl mx-auto px-6 py-10">
-  
-      <h2 className="text-2xl font-semibold mb-2">Internship Expectations</h2>
 
-      <p className="text-gray-600 mb-8">
-        Add up to four internship options and describe what you expect
-        from each.
-      </p>
-
-      <div className="space-y-8">
-        
-      {internships.map((internship, index) => (
-            <div
-              key={internship.id}
-              className="bg-white rounded-xl shadow-sm p-6 space-y-6"
-            >
-              <h3 className="text-lg font-medium">
-                Internship {index + 1}
-              </h3>
-
-              {FEATURES.map((feature) => (
-                <FeatureSlider
-                  key={feature.key}
-                  label={feature.label}
-                  description={feature.description}
-                  min={feature.min}
-                  max={feature.max}
-                  value={internship.inputs[feature.key]}
-                  onChange={(value) =>
-                    handleChange(
-                      internship.id,
-                      feature.key,
-                      value
-                    )
-                  }
-                />
-              ))}
-            </div>
-          ))}
+      <div className="px-10 py-5">
+        {/* header */}
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h2 className="text-2xl font-bold text-[#562F00]">
+              Internship Expectations
+            </h2>
+            <p className="text-sm text-[#7A4A1A] max-w-2xl">
+              Add up to four internship options and describe your expected experience across key attributes.
+            </p>
+          </div>
 
           {internships.length < MAX_INTERNSHIPS && (
             <button
               onClick={addInternship}
-              className="px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-100 transition"
+              className="px-4 py-2 rounded-lg bg-transparent border text-[#562F00] hover:bg-[#ff9644]/10
+              hover:opacity-90 transition"
             >
-              + Add another internship
+              + Add Internship
             </button>
           )}
+        </div>
 
-          <div className="pt-4">
-            <button
-              onClick={handleSubmit}
-              className="px-6 py-2 rounded-lg bg-black text-white hover:bg-gray-800 transition"
-            >
-              See Insights
-            </button>
-          </div>
+        <div className={gridCols}>
+          {internships.map((internship, index) => (
+            <div
+              key={internship.id}
+              className={`bg-[#FFFeF6] border border-[#e6d8c3]  rounded-xl shadow-sm p-4 space-y-4 transform transition-all duration-300 ease-in-out hover:border-[#562f00]/25 animate-fadeIn ${cardWidth}`}>
+              <div>
+                <h3 className="text-lg font-semibold text-[#562F00]">
+                  Internship {index + 1}
+                </h3>
+                <input
+                  type="text"
+                  placeholder="Assign a name"
+                  value={internship.name}
+                  onChange={(e) =>
+                    handleNameChange(
+                      internship.id,
+                      e.target.value
+                    )
+                  }
+                  className="mt-1 w-full text-sm px-3 py-1.5 rounded-md border border-[#e6d8c3] focus:outline-none focus:ring-1 focus:ring-[#ff9644]"
+                />
+              </div>
+
+              {FEATURES.map((feature) => (
+                <div key={feature.key} className="space-y-1">
+                  <div className="flex items-center justify-between text-sm font-medium text-[#562F00]">
+                    <div className="flex items-center gap-1">
+                      {feature.label}
+                      <span className="relative group cursor-pointer text-[#FF9644]"> ⓘ
+                        <span className="absolute z-10 hidden group-hover:block w-48 text-xs text-[#562F00] bg-[#FFFDF1] border border-[#E6D8C3] p-2 rounded shadow-md top-5 left-0">
+                          {feature.description}
+                        </span>
+                      </span>
+                    </div>
+                    <span className="text-[#7A5A2E]">
+                      {internship.inputs[feature.key]}
+                    </span>
+                  </div>
+
+                  <FeatureSlider
+                    min={feature.min}
+                    max={feature.max}
+                    value={internship.inputs[feature.key]}
+                    onChange={(value) =>
+                      handleChange(
+                        internship.id,
+                        feature.key,
+                        value
+                      )
+                    }
+                  />
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-4 flex justify-end">
+          <button
+            onClick={handleSubmit}
+            className="px-6 py-2 rounded-lg bg-[#FF9644] text-[#562F00] hover:opacity-90 transition"
+          >
+            See Insights
+          </button>
         </div>
       </div>
     </div>

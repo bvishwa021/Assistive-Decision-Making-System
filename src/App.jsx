@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import InputForm from "./pages/InputForm";
 import Insights from "./pages/Insights";
 import './App.css'
+import './index.css'
 
 function App() {
   return (
