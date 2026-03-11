@@ -1,0 +1,5 @@
+bg - #FFFDF1 - BASE
+main text - #562F00, muted - #655034 - INK
+sec text - #7A4A1A
+primary actionables- #FF9644 - ACCENT
+sec actionables - #FFCE99 - GUIDE
