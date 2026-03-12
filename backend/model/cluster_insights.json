@@ -1,0 +1,18 @@
+{
+  "0": {
+    "label": "High Growth – High Pressure",
+    "description": "This internship offers high stipend and strong reputation but involves higher workload and lower flexibility."
+  },
+  "1": {
+    "label": "Balanced Opportunity",
+    "description": "This internship provides moderate stipend, workload, and flexibility in a balanced manner."
+  },
+  "2": {
+    "label": "Flexible Learning Option",
+    "description": "This internship emphasizes flexibility and manageable workload over financial or brand value."
+  },
+  "3": {
+    "label": "Growth with Stability",
+    "description": "This internship offers good reputation and stipend with moderate workload and flexibility."
+  }
+}
