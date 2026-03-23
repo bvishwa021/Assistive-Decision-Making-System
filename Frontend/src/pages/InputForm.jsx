@@ -2,8 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FEATURES } from "../logic/FeatureConfig";
 import FeatureSlider from "../components/FeatureSlider";
-import { encodeInput } from "../logic/EncodeInput";
-import { getMockCluster } from "../logic/MockCluster";
+import { getInsights } from "../services/api";
 import Navbar from "../components/Navbar";
 import '../index.css';
 
@@ -61,35 +60,36 @@ function InputForm() {
     ]);
   };
 
-  const handleSubmit = () => {
-    const individualResults = internships.map((internship) => {
-      const encodedVector = encodeInput(internship.inputs);
-      const clusterId = getMockCluster(encodedVector);
+  const handleSubmit = async () => {
+    const apiPayload = internships.map((internship) => ({
+      name: internship.name || `Internship ${internship.id}`,
+      stipend: internship.inputs.stipend_satisfaction,
+      workload: internship.inputs.workload_intensity,
+      company_reputation: internship.inputs.company_reputation,
+      time_flexibility: internship.inputs.time_flexibility,
+    }));
 
-      return {
-        id: internship.id,
-        name: internship.name || `Internship ${internship.id}`,
-        inputs: internship.inputs,
-        encodedVector,
-        clusterId,
-      };
-    });
+    try {
+      const result = await getInsights(apiPayload);
+      const comparative =
+        internships.length > 1
+          ? {
+            type: "comparative",
+            internshipIds: internships.map((i) => i.id),
+          }
+          : null;
 
-    // might remove
-    const comparative =
-      internships.length > 1
-        ? {
-          type: "comparative",
-          internshipIds: internships.map((i) => i.id),
-        }
-        : null;
-
-    navigate("/insight", {
-      state: {
-        individualResults,
-        comparative,
-      },
-    });
+      navigate("/insight", {
+        state: {
+          individualResults: result,
+          comparative
+        },
+      });
+    } catch (error) {
+      console.error("API error:", error);
+    }
+    console.log("Internships state:", internships);
+    console.log("Payload:", apiPayload);
   };
 
   const count = internships.length;

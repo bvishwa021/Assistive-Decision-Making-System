@@ -14,7 +14,7 @@ prediction_service = PredictionService()
 insight_service = InsightService()
 
 
-@app.route("/analyze", methods=["POST"])
+@app.route("/analyze", methods=["GET", "POST"])
 def analyze():
 
     data = request.json
