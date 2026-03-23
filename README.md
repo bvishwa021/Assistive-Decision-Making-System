@@ -160,4 +160,4 @@ Built as a **Design Engineering course project** exploring how ML systems can su
 
 ---
 
-*Built by a Vishwa B. and Shyama H.*
+*Built by Vishwa B. and Shyama H.*
