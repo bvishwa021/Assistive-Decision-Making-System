@@ -12,5 +12,6 @@ export const getInsights = async (data) => {
         const errorText = await res.text();
         throw new Error(errorText);
     }
-    return res.json();
-}
+    const json = await res.json();
+    return json;
+};

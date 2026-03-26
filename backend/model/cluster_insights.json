@@ -1,18 +1,84 @@
 {
   "0": {
-    "label": "High Growth – High Pressure",
-    "description": "This internship offers high stipend and strong reputation but involves higher workload and lower flexibility."
+    "label": "Balanced & Brand-Oriented Experience",
+    "core": "This internship sits in a comfortable middle ground as the workload is manageable, the flexibility is generous, and the company's reputation adds real value to your profile. The financial reward is moderate, but the brand association and low-stress environment make it a thoughtful choice for someone who values sustainable growth over intensity.",
+    "highlights": [
+      "Strong brand value that strengthens your resume and professional network",
+      "Comfortable, manageable workload that's unlikely to overwhelm your schedule",
+      "High flexibility makes it easier to pursue parallel learning or personal commitments"
+    ],
+    "tradeoffs": [
+      "Stipend is moderate, may not be the best choice if financial return is a priority",
+      "Lower workload intensity could mean less exposure to high-stakes, fast-paced work",
+      "May not offer the kind of aggressive skill-building that demanding environments force"
+    ],
+    "reflection_prompts": [
+      "How much does brand recognition matter for the career direction you are currently pursuing?",
+      "Would a comfortable workload help you learn better, or would you thrive more under pressure?",
+      "Is this a period in your life where sustainability and balance should come first?"
+    ]
   },
   "1": {
-    "label": "Balanced Opportunity",
-    "description": "This internship provides moderate stipend, workload, and flexibility in a balanced manner."
+    "label": "Demanding & Time-Intensive Grind",
+    "core": "This internship demands a significant commitment of time and energy without offering proportional compensation or brand prestige in return. The work is intense and the flexibility is limited. It may build resilience and work ethic, but it is worth asking honestly whether the effort-to-reward ratio aligns with your current priorities.",
+    "highlights": [
+      "High workload builds a strong work ethic and exposure to real operational pressure",
+      "Intensive involvement means you are likely to be trusted with meaningful responsibilities",
+      "Can demonstrate commitment and capacity to future employers"
+    ],
+    "tradeoffs": [
+      "Limited flexibility may conflict with academic deadlines, personal commitments, or other learning goals",
+      "Moderate reputation and stipend mean the external rewards may not match the effort invested",
+      "Risk of burnout if workload is not manageable alongside other responsibilities"
+    ],
+    "reflection_prompts": [
+      "Are you in a position right now where you can absorb a high-effort commitment without it affecting other priorities?",
+      "What specifically would you gain from this experience that you could not gain elsewhere with less cost?",
+      "Is the intensity something you are choosing, or something you are defaulting into?"
+    ]
   },
   "2": {
-    "label": "Flexible Learning Option",
-    "description": "This internship emphasizes flexibility and manageable workload over financial or brand value."
+    "label": "High-Pressure, High-Reward Opportunity",
+    "core": "This internship offers some of the strongest external returns available, i.e., high stipend, strong company reputation, and deep skill exposure. The cost is real: workload is demanding and personal flexibility is very limited. It rewards those who are prepared for intensity and have the bandwidth to commit fully.",
+    "highlights": [
+      "High stipend offers meaningful financial return alongside professional experience",
+      "Strong company reputation provides significant resume and network value",
+      "Intensive environment accelerates skill development and professional maturity"
+    ],
+    "tradeoffs": [
+      "Very limited flexibility; personal time, side projects, and other commitments will likely take a back seat",
+      "High workload requires consistent energy and focus over the duration of the internship",
+      "The pressure environment may not suit every working or learning style"
+    ],
+    "reflection_prompts": [
+      "Do you currently have the bandwidth to mentally, academically, and personally commit to a high-intensity experience?",
+      "Are the financial and reputational rewards genuinely aligned with what you need at this stage, or are they just appealing in the abstract?",
+      "What does your support system look like during this period? High-pressure environments are easier to navigate when the rest of life is stable."
+    ]
   },
   "3": {
-    "label": "Growth with Stability",
-    "description": "This internship offers good reputation and stipend with moderate workload and flexibility."
+    "label": "Low-Intensity, Flexible Experience",
+    "core": "This internship asks little of you and gives you significant control over your time. The workload is light, the flexibility is high, and the stress is low. In return, the financial reward and career-building impact are limited. It may be exactly what you need right now or it may leave you under-stimulated. That depends entirely on what this period of your life calls for.",
+    "highlights": [
+      "High flexibility allows you to pursue parallel goals, i.e., learning, projects, or personal priorities",
+      "Low workload and stress create a stable, pressure-free environment",
+      "Good option if you are recovering from burnout or navigating a demanding semester alongside the internship"
+    ],
+    "tradeoffs": [
+      "Low stipend makes it a poor choice if financial return matters right now",
+      "Limited company reputation means lower resume and network impact",
+      "Light workload may not challenge you enough to produce meaningful skill growth"
+    ],
+    "reflection_prompts": [
+      "What would you do with the extra time and flexibility this internship affords you, do you have a clear answer?",
+      "Is the low intensity a feature for you right now, or a compromise you are settling for?",
+      "Will you look back on this experience as a useful breathing room, or as an opportunity cost?"
+    ]
+  },
+  "_comparison_templates": {
+    "same_cluster": "Both {a} and {b} fall into the same experience archetype: {label}. While the names may differ, the underlying experience pattern is structurally similar. Your decision between them is likely to come down to factors beyond what this system can measure: the team, the domain, the manager, or your gut feeling.",
+    "high_reward_vs_flexible": "{a} sits at the high-pressure, high-reward end of the spectrum while {b} offers the opposite, low intensity and high flexibility. These represent fundamentally different bets on how you want to spend this time. Neither is objectively better. The question is which trade-off makes more sense for where you are right now.",
+    "grind_vs_balanced": "{a} is demanding without proportional external reward, while {b} offers a more balanced return on your effort. If external validation matters to you, {b} provides more of it. If you are specifically seeking intensity for its own sake, {a} may still serve that purpose.",
+    "brand_vs_reward": "{a} emphasizes company reputation and flexibility while {b} prioritizes stipend and intensity. These reflect different definitions of value. One invests in your network and brand; the other invests in your bank account and resilience. What does this season of your career need more of?"
   }
 }

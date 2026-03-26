@@ -49,7 +49,7 @@ function Home() {
             </button>
           </div>
         </section>
-        <div className="justify-items-center">
+        <div className="justify-items-center sm:max-w-2xl mx-auto text-center">
           <p className="text-[#7A4A1A] text-sm">
             It does not recommend decisions — it highlights trade-offs
             and prompts reflection.

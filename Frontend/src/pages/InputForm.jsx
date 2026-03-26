@@ -5,6 +5,7 @@ import FeatureSlider from "../components/FeatureSlider";
 import { getInsights } from "../services/api";
 import Navbar from "../components/Navbar";
 import '../index.css';
+import LoadingOverlay from "../components/LoadingOverlay";
 
 const MAX_INTERNSHIPS = 4;
 
@@ -23,6 +24,7 @@ const createEmptyInputs = (id) => {
 
 function InputForm() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [internships, setInternships] = useState([
     createEmptyInputs(1),
   ]);
@@ -69,27 +71,24 @@ function InputForm() {
       time_flexibility: internship.inputs.time_flexibility,
     }));
 
-    try {
-      const result = await getInsights(apiPayload);
-      const comparative =
-        internships.length > 1
-          ? {
-            type: "comparative",
-            internshipIds: internships.map((i) => i.id),
-          }
-          : null;
+    setLoading(true);
 
+    try {
+      const [apiResponse] = await Promise.all([
+        getInsights(apiPayload),
+        new Promise((resolve) => setTimeout(resolve, 4000)),
+      ]);
+      
       navigate("/insight", {
         state: {
-          individualResults: result,
-          comparative
+          individualResults: apiResponse.results,
+          comparison_text: apiResponse.comparison_text,
         },
       });
     } catch (error) {
       console.error("API error:", error);
+      setLoading(false);
     }
-    console.log("Internships state:", internships);
-    console.log("Payload:", apiPayload);
   };
 
   const count = internships.length;
@@ -104,6 +103,7 @@ function InputForm() {
 
   return (
     <div className="min-h-screen bg-[#FFFDF1]">
+      {loading && <LoadingOverlay />}
       <Navbar />
 
       <div className="px-10 py-5">
@@ -114,7 +114,7 @@ function InputForm() {
               Internship Expectations
             </h2>
             <p className="text-sm text-[#7A4A1A] max-w-2xl">
-              Add up to four internship options and describe your expected experience across key attributes.
+              Add two to four internship options and describe your expected experience across key attributes.
             </p>
           </div>
 
