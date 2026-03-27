@@ -6,9 +6,10 @@ from services.prediction_service import PredictionService
 from services.insight_service import InsightService
 from utils.validations import validate_request
 from utils.response_formatter import format_response
+from collections import Counter
 
 app = Flask(__name__)
-CORS(app)
+CORS(app) #change after vercel - , origins=["https://your-app-name.vercel.app"]
 prediction_service = PredictionService()
 insight_service = InsightService()
 
@@ -35,7 +36,7 @@ def analyze():
         raw_values.append(values)
         cluster = prediction_service.predict_cluster(values)
         insight = insight_service.get_insight(cluster)
-        results.append(format_response(internship["name"], cluster, insight))
+        results.append(format_response(internship["name"], cluster, insight, values))
 
     feature_names = ["stipend", "workload", "company reputation", "time flexibility"]
     for i in range(len(results)):
@@ -79,7 +80,6 @@ def analyze():
             comparison_text = "Each internship you submitted represents a distinctly different experience archetype. There is no overlap in pattern — which means your options are genuinely varied. The comparison across cards should surface which trade-off set feels most aligned with where you are right now."
         else:
             # Some overlap, some different
-            from collections import Counter
             counts = Counter(cluster_ids)
             duplicate_label = None
             for cid, count in counts.items():
@@ -91,4 +91,4 @@ def analyze():
     return jsonify({"results": results, "comparison_text": comparison_text})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)

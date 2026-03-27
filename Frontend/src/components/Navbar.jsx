@@ -8,7 +8,7 @@ const Navbar = () => {
                 <Link 
                 to='/' 
                 className="flex items-center">
-                    <h1 className="text-2xl font-bold text-[#562F00]">InnerLens</h1>
+                    <h1 className="text-2xl font-bold text-[#562F00]">ChoiceLab</h1>
                 </Link>
                 <ul className="flex space-x-6">
                     <li>

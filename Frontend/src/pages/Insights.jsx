@@ -1,5 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import InternshipRadarChart from "../components/InternshipRadarChart";
+import ComparisonBarChart from "../components/ComparisonBarChart";
 
 function Insights() {
     const location = useLocation();
@@ -11,10 +13,10 @@ function Insights() {
         return (
             <>
             <Navbar />
-            <div className="relative w-full px-10 py-5 space-y-10">
+            <div className="relative w-full px-10 py-5 space-y-10 pt-12 md:pt-0">
                 <button
                     onClick={() => navigate("/input")}
-                    className="absolute top-4 right-10 px-6 py-2 rounded-lg text-sm font-semibold bg-[#FF9644] text-[#562F00] hover:bg-[#fc9f58] transition"
+                    className="absolute top-4 right-4 md:right-10 px-4 md:px-6 py-2 rounded-lg text-sm font-semibold bg-[#FF9644] text-[#562F00] hover:bg-[#fc9f58] transition"
                 >
                     Go Back
                 </button>
@@ -32,23 +34,24 @@ function Insights() {
         individualResults.length === 1
             ? "grid-cols-1 max-w-3xl mx-auto"
             : individualResults.length === 2
-                ? "grid-cols-2"
+                ? "grid-cols-1 md:grid-cols-2"
                 : individualResults.length === 3
-                    ? "grid-cols-3"
-                    : "grid-cols-4";
+                    ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+                    : "grid-cols-1 md:grid-cols-2 lg:grid-cols-4";
 
     return (
         <div className="min-h-screen bg-[#fffdf1]">
             <Navbar />
-            <div className="relative w-full px-10 py-5 space-y-10">
-                <button
-                    onClick={() => navigate("/input")}
-                    className="absolute top-4 right-10 px-6 py-2 rounded-lg text-sm font-semibold bg-[#FF9644] text-[#562F00] hover:bg-[#fc9f58] transition"
-                >
-                    Go Back
-                </button>
-                <h1 className="text-2xl font-bold text-[#562f00]">Internship Insights</h1>
-
+            <div className="relative w-full px-4 md:px-10 py-5 space-y-10">
+                <div className="pt-12 md:pt-0">
+                    <button
+                        onClick={() => navigate("/input")}
+                        className="absolute top-4 right-4 md:right-10 px-4 md:px-6 py-2 rounded-lg text-sm font-semibold bg-[#FF9644] text-[#562F00] hover:bg-[#fc9f58] transition"
+                    >
+                        Go Back
+                    </button>
+                    <h1 className="text-2xl font-bold text-[#562f00] pt-12 md:pt-0">Internship Insights</h1>
+                </div>
                 {/* Individual Insight Cards */}
                 <div className={`grid ${gridCols} gap-6`}>
                     {individualResults.map((result, index) => (
@@ -80,6 +83,8 @@ function Insights() {
                             <p className="text-sm text-[#5f5548] leading-relaxed">
                                 {result.core}
                             </p>
+
+                            { result.values && <InternshipRadarChart values={result.values} /> }
 
                             {/* Highlights */}
                             <div className="space-y-1">
@@ -138,6 +143,9 @@ function Insights() {
                         <p className="text-sm text-[#5f5548] leading-relaxed">
                             {comparison_text}
                         </p>
+
+                        { individualResults.length > 1 && ( <ComparisonBarChart results={individualResults}/> ) }
+
                     </div>
                 )}
             </div>

@@ -25,6 +25,7 @@ const createEmptyInputs = (id) => {
 function InputForm() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [inputError, setInputerror] = useState("");
   const [internships, setInternships] = useState([
     createEmptyInputs(1),
   ]);
@@ -71,6 +72,12 @@ function InputForm() {
       time_flexibility: internship.inputs.time_flexibility,
     }));
 
+    if (internships.length < 2) {
+      setInputerror("Please add at least 2 internships to see a meaningful comparison.");
+      return;
+    }
+    setInputerror("");
+
     setLoading(true);
 
     try {
@@ -94,9 +101,9 @@ function InputForm() {
   const count = internships.length;
   const gridCols =
     count === 1 ? "flex justify-center" :
-      count === 2 ? "grid grid-cols-2 gap-6" :
-        count === 3 ? "grid grid-cols-3 gap-6" :
-          "grid grid-cols-4 gap-6";
+      count === 2 ? "grid grid-cols-1 md:grid-cols-2 gap-6" :
+        count === 3 ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" :
+          "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6";
 
   const cardWidth =
     count === 1 ? "max-w-md w-full" : "w-full";
@@ -106,9 +113,9 @@ function InputForm() {
       {loading && <LoadingOverlay />}
       <Navbar />
 
-      <div className="px-10 py-5">
+      <div className="px-4 md:px-10 py-5">
         {/* header */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between mb-6">
           <div>
             <h2 className="text-2xl font-bold text-[#562F00]">
               Internship Expectations
@@ -186,7 +193,10 @@ function InputForm() {
           ))}
         </div>
 
-        <div className="mt-4 flex justify-end">
+        <div className="mt-4 flex flex-col items-end gap-2">
+          { inputError && (
+            <p className="text-sm text-[#a0522d] italic">{inputError}</p>
+          ) }
           <button
             onClick={handleSubmit}
             className="px-6 py-2 rounded-lg bg-[#FF9644] text-[#562F00] hover:bg-[#fc9f58] hover:border-amber-900 transition font-semibold"
