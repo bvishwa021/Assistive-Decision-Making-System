@@ -9,7 +9,7 @@ from utils.response_formatter import format_response
 from collections import Counter
 
 app = Flask(__name__)
-CORS(app, origins=["https://choicelab-murex.vercel.app/"])
+CORS(app) #, origins=["https://choicelab-murex.vercel.app/"]
 prediction_service = PredictionService()
 insight_service = InsightService()
 
