@@ -77,12 +77,13 @@ Frontend displays archetype card with tradeoffs and reflection prompts
 
 ## Output
 
-> ⚠️ This section will be updated once the output UI is finalized.
-
 Each submitted internship returns an archetype card containing:
 - Archetype label and core description
 - Highlights and tradeoffs
 - Reflection prompts to guide the student's own reasoning
+- Radar Chart
+
+A Contextual Comparison card containing a summary of how internships differ contextually. It also depicts a bar chart representing side-by-side comparison of internships across 4 features.
 
 ---
 
