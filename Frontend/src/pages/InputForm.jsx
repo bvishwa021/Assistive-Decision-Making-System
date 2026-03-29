@@ -26,6 +26,8 @@ function InputForm() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [inputError, setInputerror] = useState("");
+  const [showDevNote, setShowDevNote] = useState(false);
+  const [openTooltip, setOpenTooltip] = useState(null);
   const [internships, setInternships] = useState([
     createEmptyInputs(1),
   ]);
@@ -85,7 +87,7 @@ function InputForm() {
         getInsights(apiPayload),
         new Promise((resolve) => setTimeout(resolve, 4000)),
       ]);
-      
+
       navigate("/insight", {
         state: {
           individualResults: apiResponse.results,
@@ -109,7 +111,7 @@ function InputForm() {
     count === 1 ? "max-w-md w-full" : "w-full";
 
   return (
-    <div className="min-h-screen bg-[#FFFDF1]">
+    <div className="min-h-screen bg-[#FFFDF1]" onClick={() => setOpenTooltip(null)}>
       {loading && <LoadingOverlay />}
       <Navbar />
 
@@ -164,7 +166,17 @@ function InputForm() {
                   <div className="flex items-center justify-between text-sm font-medium text-[#562F00]">
                     <div className="flex items-center gap-1">
                       {feature.label}
-                      <span className="relative group cursor-pointer text-[#FF9644]"> ⓘ
+                      <span
+                        className="relative cursor-pointer text-[#FF9644]"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setOpenTooltip(openTooltip === `${internship.id}-${feature.key}` ? null : `${internship.id}-${feature.key}`);
+                        }}> ⓘ
+                        {openTooltip === `${internship.id}-${feature.key}` && (
+                          <span className="absolute z-10 w-48 text-xs text-[#562F00] bg-[#FFFDF1] border border-[#E6D8C3] p-2 rounded shadow-md top-5 left-0">
+                            {feature.description}
+                          </span>
+                        )}
                         <span className="absolute z-10 hidden group-hover:block w-48 text-xs text-[#562F00] bg-[#FFFDF1] border border-[#E6D8C3] p-2 rounded shadow-md top-5 left-0">
                           {feature.description}
                         </span>
@@ -194,15 +206,33 @@ function InputForm() {
         </div>
 
         <div className="mt-4 flex flex-col items-end gap-2">
-          { inputError && (
+          {inputError && (
             <p className="text-sm text-[#a0522d] italic">{inputError}</p>
-          ) }
-          <button
-            onClick={handleSubmit}
-            className="px-6 py-2 rounded-lg bg-[#FF9644] text-[#562F00] hover:bg-[#fc9f58] hover:border-amber-900 transition font-semibold"
-          >
-            See Insights
-          </button>
+          )}
+          <div className="flex items-center gap-2">
+            <div className="relative">
+              <button
+                onClick={() => setShowDevNote((prev) => !prev)}
+                className="w-7 h-7 rounded-full border border-[#d4bb95] text-[#7a4a1d] text-xs font-bold hover:bg-[#fdf3e7] transition flex items-center justify-center"
+              >
+                i
+              </button>
+              {showDevNote && (
+                <div className="absolute bottom-10 right-0 w-64 max-w-[80vw] bg-[#fffdf1] border border-[#d4bb95] rounded-xl shadow-lg p-4 z-50 space-y-1">
+                  <p className="text-xs font-semibold text-[#562f00]">Developer's Note</p>
+                  <p className="text-xs text-[#5f5548] leading-relaxed">
+                    This app is hosted on a free server that spins down after inactivity. The first analysis may take 60–90 seconds to respond while the server wakes up. Subsequent requests will be fast. Thank you for your patience.
+                  </p>
+                </div>
+              )}
+            </div>
+            <button
+              onClick={handleSubmit}
+              className="px-6 py-2 rounded-lg bg-[#FF9644] text-[#562F00] hover:bg-[#fc9f58] hover:border-amber-900 transition font-semibold"
+            >
+              See Insights
+            </button>
+          </div>
         </div>
       </div>
     </div>
